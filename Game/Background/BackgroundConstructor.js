@@ -1,31 +1,32 @@
 export default class Layer{
-    constructor(image, speed, speedModifier){
+    constructor(image, speedModifier){
         this.image = image,
         this.x = 0,
         this.y = 0,
         this.width = 2400,
         this.height  = 700,
         this.x2 = this.width,
-        this.speed = speed,
-        this.speedModifier = speedModifier*speed
+        this.speed = 0
+        this.speedModifier = speedModifier
     }
-    update(){
+    update(speed){
         //First Background Update
-        if(this.x <= -this.width){
-            this.x=this.width+this.x2-this.speedModifier
+        this.speed = speed*this.speedModifier
+        if(this.x <= -this.width + this.speed){
+            this.x=this.width+this.x2-this.speed
         }else{
-            this.x-=this.speedModifier
+            this.x-=this.speed
         }
         //Second Background Update
-        if(this.x2 <= -this.width){
-            this.x2=this.width+this.x-this.speedModifier
+        if(this.x2 <= -this.width + this.speed){
+            this.x2=this.width+this.x-this.speed
         }else{
-            this.x2-=this.speedModifier
+            this.x2-=this.speed
         }
     }
     draw(context){
-        context.drawImage(object.image,object.x,object.y,object.width,object.height)
-        context.drawImage(object.image,object.x2,object.y,object.width,object.height)
+        context.drawImage(this.image,this.x,this.y,this.width,this.height)
+        context.drawImage(this.image,this.x2,this.y,this.width,this.height)
 
     }
     
